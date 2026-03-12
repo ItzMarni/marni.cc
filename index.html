@@ -3,7 +3,19 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>site down</title>
+
+    <meta property="og:title" content="is it down?" />
+    <meta property="og:description" content="is it down?" />
+    <meta property="og:image" content="https://marni.cc/yes-the-site-is-down.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://marni.cc/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://marni.cc/yes-the-site-is-down.png" />
+
+    <meta name="theme-color" content="#ff0000" />
 
     <style>
       html,
@@ -36,10 +48,50 @@
         max-width: 90vw;
         max-height: 90vh;
       }
+
+      #bounce {
+        position: fixed;
+        width: 35vw;
+        max-width: 400px;
+        height: auto;
+        pointer-events: none;
+      }
     </style>
   </head>
 
   <body>
     <img src="img.png" alt="site is cooked" />
+
+    <img id="bounce" src="./yes-the-site-is-down.png" alt="" />
+
+    <script>
+      const img = document.getElementById('bounce');
+
+      let x = 100;
+      let y = 100;
+      let vx = 2;
+      let vy = 2;
+
+      function animate() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        const iw = img.offsetWidth;
+        const ih = img.offsetHeight;
+
+        x += vx;
+        y += vy;
+
+        if (x + iw >= w || x <= 0) vx *= -1;
+        if (y + ih >= h || y <= 0) vy *= -1;
+
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
   </body>
 </html>
